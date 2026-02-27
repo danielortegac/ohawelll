@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-ohawell-base: #f5f2ed;
+  --color-ohawell-ink: #1a1a1a;
+  --color-ohawell-awaken: #e8eedf;
+  --color-ohawell-calm: #d1e0d5; /* Soft sage green */
+  --color-ohawell-desire: #e6b8b8; /* Soft reddish blush */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-ohawell-base);
+  color: var(--color-ohawell-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: var(--font-serif);
+}
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  
+  /* Premium UI Utilities */
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)];
+  }
+  .glass-panel-dark {
+    @apply bg-black/5 backdrop-blur-2xl border border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.05)];
+  }
+  
+  /* Shiny Button Effect */
+  .btn-shiny {
+    @apply relative overflow-hidden;
+  }
+  .btn-shiny::after {
+    content: '';
+    @apply absolute top-0 left-[-100%] w-1/2 h-full;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    animation: shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .btn-shiny-dark::after {
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
+  }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1.05); }
+  50% { transform: scale(1); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
